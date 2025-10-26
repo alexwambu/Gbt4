@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GBTNetwork Contract Deployer</title>
+    <style>
+      body { font-family: Arial, sans-serif; text-align: center; padding: 40px; background: #f6f7f8; }
+      button { padding: 10px 20px; font-size: 16px; border: none; border-radius: 8px; background: #0078ff; color: white; cursor: pointer; }
+      button:hover { background: #005fcb; }
+      #result { margin-top: 20px; font-size: 18px; color: #333; }
+    </style>
+  </head>
+  <body>
+    <h1>🚀 GBTNetwork Contract Deployer</h1>
+    <p>Click below to deploy <b>GoldBarTether</b> to the network.</p>
+    <button id="deployBtn">Deploy Contract</button>
+    <div id="result"></div>
+
+    <script>
+      const deployBtn = document.getElementById('deployBtn');
+      const resultDiv = document.getElementById('result');
+
+      deployBtn.addEventListener('click', async () => {
+        resultDiv.innerHTML = "⏳ Deploying...";
+        const res = await fetch('/api/deploy');
+        const data = await res.json();
+        if (data.success) {
+          resultDiv.innerHTML = `✅ Contract Deployed at:<br><code>${data.address}</code>`;
+        } else {
+          resultDiv.innerHTML = `❌ Error: ${data.error}`;
+        }
+      });
+
+      setInterval(async () => {
+        await fetch('/api/status');
+      }, 240000); // Heartbeat every 4 min
+    </script>
+  </body>
+</html>
