@@ -1,0 +1,17 @@
+{
+  "name": "gbt-render-deployer",
+  "version": "2.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "node deploy.js",
+    "heartbeat": "node heartbeat.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ethers": "^6.10.0",
+    "dotenv": "^16.4.1",
+    "node-fetch": "^3.3.2"
+  }
+}
